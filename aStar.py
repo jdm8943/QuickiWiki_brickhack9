@@ -35,3 +35,6 @@ def a_star(start, end):    # start/end are nodes for a*
     # TODO Sol return the cost of a page
     def calculateCost(node):
         return 0;
+    
+    def getPath():
+        return 0;
