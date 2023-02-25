@@ -4,8 +4,8 @@ import quikiwiki as qw
 class Heuristics:
 
     @staticmethod
-    def calculateH():
-        pass
+    def calculateH(test):
+        return 0
 
     @staticmethod
     # checks how many categories are the same between the current page and the goal

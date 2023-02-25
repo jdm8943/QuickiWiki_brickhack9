@@ -1,4 +1,4 @@
-from heuristic import *
+import heuristic
 
 """
    Node class used to store information about individual articles
@@ -16,13 +16,16 @@ class Node:
    def __init__(self, page, parent):
       self.page = page
       self.name = page.title() #might be unnecessary since it's a quick command from page
-      self.h = Heuristics.calculateH(self.page)
+      self.h = heuristic.Heuristics.calculateH(self.page)
       self.parent = parent
-      self.totalPathWeight = parent.pathWeight + self.getCurrPathWeight(page)
+      if parent is not None:
+         self.totalPathWeight = 0      #calculating g
+      else:
+         self.totalPathWeight = parent.totalPathWeight + self.getCurrPathWeight(page)
       self.f = self.totalPathWeight + self.h
 
-   def getCurrPathWeight(page):
-      return 123
+   def getCurrPathWeight(self, page):
+      return 1
         
    def __eq__(self, other):
       if not isinstance(other, self.__class__):
@@ -33,7 +36,10 @@ class Node:
          return False
    
    def __lt__(self, other):
-      return self.h < self.other
+      return self.h < other.h
    
    def __hash__(self):
       return hash(self.name)
+   
+   def __str__(self) -> str:
+      return self.name
