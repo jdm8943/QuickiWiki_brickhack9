@@ -16,7 +16,7 @@ site = pywikibot.Site('en', 'wikipedia')  # The site we want to run our bot on
 site.login()
 
 def a_star(start, end):    # start/end are nodes for a*
-    self = set();
+    self = set()
     start.totalPathWeight = 0      # distance from start    
     open = [start]
     closed = set()
@@ -31,13 +31,13 @@ def a_star(start, end):    # start/end are nodes for a*
             neighbor.totalPathWeight = neighbor.parent.totalPathWeight + calculateCost(neighbor)
             if curr.totalPathWeight < neighbor.totalPathWeight:
                 neighbor.parent = curr
-                neighbor.setF();
+                neighbor.setF()
                 heappush(open, neighbor)
                 
     # TODO Sol get neighbors from a node and return nodes
     def getNeighbors(root):
-        return 0;
+        return 0
     
     # TODO Sol return the cost of a page
     def calculateCost(node):
-        return 0;
+        return 0
