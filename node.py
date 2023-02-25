@@ -42,4 +42,8 @@ class Node:
       return hash(self.name)
    
    def __str__(self) -> str:
-      return self.name
+      if self.parent is not None:
+         stri =  "[name:" + self.name + ", parent: " + self.parent.name + ", f: " + str(self.f) + ", g:" + str(self.totalPathWeight)
+      else:
+         stri =  "[name:" + self.name + ", parent: NONE";
+      return stri

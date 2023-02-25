@@ -17,11 +17,10 @@ def runAStar(start, end):    # start/end are nodes for a*
 
         closed.add(curr)        # add curr to closed
 
-        print("CURR: ", curr)
+        # print("CURR: ", curr)
 
         for neighbor in getNeighbors(curr):
             if neighbor.page == end:         # if neighbor = goal, return the path
-                print("WE ARE AT THE END!!!")
                 return getPath(neighbor)
             if neighbor in closed:      # if curr has already been visited go next
                 continue

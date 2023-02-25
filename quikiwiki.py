@@ -8,21 +8,19 @@ class Quikiwiki:
         self.site.login()
         self.startPage = pywikibot.Page(self.site, "Doom (1993 video game)")
         # self.goalPage = pywikibot.Page(self.site, "Doom_(2016_video_game)")
-        self.goalPage = pywikibot.Page(self.site, "Yahoo! Games")
+        self.goalPage = pywikibot.Page(self.site, "Wii Shop Channel")
         
         self.goalCategories = set(self.goalPage.categories())
 
 if __name__=='__main__':
     qw = Quikiwiki()
-    print("RAHHH! quikiwiki running!")
-    print(qw.site)
-
-    print(qw.goalPage.title())
+    print("START:", qw.startPage.title())
+    print("GOAL:", qw.goalPage.title())
     listStar = aStar.runAStar(qw.startPage, qw.goalPage)
     listStar.reverse()
-    print("ASTAR::::::::")
+    print("A-Star Solution:")
     num = 0
     for i in listStar:
-        print(num, ":", i)
+        print(num, "\t:", i)
         num+=1
 
