@@ -1,14 +1,19 @@
 import pywikibot
+import
 
 class Heuristics:
 
     @staticmethod
-    def calculateH():
+    def calculateH(page):
         pass
 
     @staticmethod
-    def checkSameCategory(category1, category2):
-        # print(str(category1) + str(category2))
+    # checks how many categories are the same
+    def checkCategoriesWithGoal():
+        # print(str(category1.title()[9:]))
+        # print(str(category2.title()[9:]))
+        cat1 = str(category1.title()[9:])   # strings containing names of two categories
+        cat2 = str(category2.title()[9:])
         pass
 
 
