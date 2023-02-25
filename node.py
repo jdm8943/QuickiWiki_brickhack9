@@ -34,3 +34,6 @@ class Node:
    
    def __lt__(self, other):
       return self.h < self.other
+   
+   def __hash__(self):
+      return hash(self.name)
