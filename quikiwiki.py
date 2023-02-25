@@ -1,4 +1,5 @@
 import heuristic, aStar
+import pandas as pd
 import pywikibot
 
 class Quikiwiki:
@@ -11,18 +12,21 @@ class Quikiwiki:
         self.goalPage = pywikibot.Page(self.site, "Yahoo! Games")
         
         self.goalCategories = set(self.goalPage.categories())
+    
+    # def processGoalText():
+    #     self.
 
 if __name__=='__main__':
     qw = Quikiwiki()
     print("RAHHH! quikiwiki running!")
     print(qw.site)
 
-    print(qw.goalPage.title())
-    listStar = aStar.runAStar(qw.startPage, qw.goalPage)
-    listStar.reverse()
-    print("ASTAR::::::::")
-    num = 0
-    for i in listStar:
-        print(num, ":", i)
-        num+=1
+    # print(qw.goalPage.title())
+    # listStar = aStar.runAStar(qw.startPage, qw.goalPage)
+    # listStar.reverse()
+    # print("ASTAR::::::::")
+    # num = 0
+    # for i in listStar:
+    #     print(num, ":", i)
+    #     num+=1
 
