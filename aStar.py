@@ -27,13 +27,17 @@ def a_star(start, end):    # start/end are nodes for a*
         closed.add(curr)        # add curr to closed
         if curr == end:         # if curr = goal return the path
             return path         # TODO create func that gets 
-        for weight, neighbor in getNeighbors(curr):
-            g = curr.g + weight
-            if g < neighbor.g:
-                neighbor.g = g
-                neighbor.f = g + self.heuristic(neighbor.location, end.location)
+        for neighbor in getNeighbors(curr):
+            neighbor.totalPathWeight = neighbor.parent.totalPathWeight + calculateCost(neighbor)
+            if curr.totalPathWeight < neighbor.totalPathWeight:
                 neighbor.parent = curr
+                neighbor.setF();
                 heappush(open, neighbor)
                 
+    # TODO Sol get neighbors from a node and return nodes
     def getNeighbors(root):
+        return 0;
+    
+    # TODO Sol return the cost of a page
+    def calculateCost(node):
         return 0;
