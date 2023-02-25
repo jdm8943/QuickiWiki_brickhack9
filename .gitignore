@@ -1,4 +1,5 @@
 .vscode
-apicache-py3
+apicache-py3/
 core/
 throttle.ctrl
+__pycache__
