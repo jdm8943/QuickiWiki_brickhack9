@@ -1,12 +1,14 @@
+from heuristic import *
+
 class Node:
-    def __init__(self, name, h, g, totalPathWeight, parent):
-        # Self, name, heuristic value (float), total paths (int), pathweight (int), parent (node)
+    def __init__(self, page, name, parent):
+        # Self, page, name, pathweight (int), parent (node)
+        self.page = page
         self.name = name
-        self.h = h
-        self.g = g
-        self.totalPathWeight = totalPathWeight
+        self.h = Heuristics.calculateH(self.page)
+        self.totalPathWeight = 0
         self.parent = parent
-        self.f = totalPathWeight + h
+        self.f = -1
         
     def __eq__(self, other):
       if not isinstance(other, self.__class__):
@@ -15,3 +17,6 @@ class Node:
          return True
       else:
          return False
+      
+    def setF(self):
+      self.f = self.totalPathWeight + self.h;
