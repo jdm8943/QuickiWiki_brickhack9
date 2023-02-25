@@ -1,22 +1,12 @@
-# Pywikibot needs a config file:
-pywikibot_config = r"""# -*- coding: utf-8  -*-
-
-
-mylang = 'en'
-family = 'wikipedia'
-usernames['wikipedia']['en'] = 'SolKr'"""
-
-with open('user-config.py', 'w', encoding="utf-8") as f:
-    f.write(pywikibot_config)
-
-import pywikibot
+import pywikibot as pw
+import node
 from heapq import *
 
-site = pywikibot.Site('en', 'wikipedia')  # The site we want to run our bot on
+site = pw.Site('en', 'wikipedia')  # The site we want to run our bot on
 site.login()
 
 def a_star(start, end):    # start/end are nodes for a*
-    self = set()
+    self = set();
     start.totalPathWeight = 0      # distance from start    
     open = [start]
     closed = set()
@@ -31,13 +21,20 @@ def a_star(start, end):    # start/end are nodes for a*
             neighbor.totalPathWeight = neighbor.parent.totalPathWeight + calculateCost(neighbor)
             if curr.totalPathWeight < neighbor.totalPathWeight:
                 neighbor.parent = curr
-                neighbor.setF()
+                neighbor.setF();
                 heappush(open, neighbor)
                 
     # TODO Sol get neighbors from a node and return nodes
     def getNeighbors(root):
-        return 0
+        neighbors = []
+        links = pw.linkedPages()
+        for aLink in links:
+            neighbors.add(node.Node(aLink, root))
+        return neighbors;
     
     # TODO Sol return the cost of a page
     def calculateCost(node):
-        return 0
+        return 0;
+    
+    def getPath():
+        return 0;

@@ -4,7 +4,7 @@ import quikiwiki as qw
 class Heuristics:
 
     @staticmethod
-    def calculateH(page):
+    def calculateH():
         pass
 
     @staticmethod
