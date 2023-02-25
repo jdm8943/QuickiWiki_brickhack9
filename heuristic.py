@@ -1,5 +1,5 @@
 import pywikibot
-import
+import quikiwiki as qw
 
 class Heuristics:
 
@@ -8,18 +8,16 @@ class Heuristics:
         pass
 
     @staticmethod
-    # checks how many categories are the same
-    def checkCategoriesWithGoal():
+    # checks how many categories are the same between the current page and the goal
+    def checkCategoriesWithGoal(currentPage):
         # print(str(category1.title()[9:]))
         # print(str(category2.title()[9:]))
-        cat1 = str(category1.title()[9:])   # strings containing names of two categories
-        cat2 = str(category2.title()[9:])
-        pass
+        curCatSet = set(currentPage.categories())
+        numSame = len(set.intersection(curCatSet, quw.goalCategories))
+        return numSame
 
 
 if __name__=='__main__':
-    site = pywikibot.Site('en', 'wikipedia')  # The site we want to run our bot on
-    site.login()
-    page = pywikibot.Page(site, "The Worlds of Doctor Who")
-    categories = page.categories()
-    Heuristics.checkSameCategory(next(categories), next(categories))
+    quw = qw.Quikiwiki()
+    curPage = pywikibot.Page(quw.site, "The Worlds of Doctor Who")
+    print(Heuristics.checkCategoriesWithGoal(curPage))
