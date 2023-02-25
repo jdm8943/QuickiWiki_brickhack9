@@ -15,14 +15,14 @@ from heuristic import *
 class Node:
    def __init__(self, page, parent):
       self.page = page
-      self.name = self.getName(page)
+      self.name = page.title() #might be unnecessary since it's a quick command from page
       self.h = Heuristics.calculateH(self.page)
-      self.totalPathWeight = 0
       self.parent = parent
-      self.f = -1
-      
-   def setF(self):
+      self.totalPathWeight = parent.pathWeight + self.getCurrPathWeight(page)
       self.f = self.totalPathWeight + self.h
+
+   def getCurrPathWeight(page):
+      return 123
         
    def __eq__(self, other):
       if not isinstance(other, self.__class__):
