@@ -18,7 +18,7 @@ class Node:
       self.name = page.title() #might be unnecessary since it's a quick command from page
       self.h = heuristic.Heuristics.calculateH(self.page)
       self.parent = parent
-      if parent is not None:
+      if parent is None:
          self.totalPathWeight = 0      #calculating g
       else:
          self.totalPathWeight = parent.totalPathWeight + self.getCurrPathWeight(page)
@@ -36,7 +36,7 @@ class Node:
          return False
    
    def __lt__(self, other):
-      return self.h < other.h
+      return self.f < other.f
    
    def __hash__(self):
       return hash(self.name)
