@@ -1,4 +1,5 @@
 import pywikibot
+import nltk
 import quikiwiki as qw
 
 class Heuristics:
