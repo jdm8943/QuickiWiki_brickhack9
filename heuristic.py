@@ -1,6 +1,5 @@
 from io import StringIO
 import re, string, pywikibot, lxml
-from nltk import word_tokenize, WordNetLemmatizer, pos_tag
 from nltk.corpus import stopwords
 import pandas as pd
 import quikiwiki as qw
@@ -23,29 +22,30 @@ class Heuristics:
     
 
     @staticmethod
-    def preprocess(page) -> str:
+    def preprocess(page, quw) -> str:
         pagetext = page.get()
         doc = quw.nlp(pagetext.lower())
         result = {}
         for token in doc:
-            if token.text in STOP_WORDS:
+            if token.text in quw.nlp.Defaults.stop_words:
                 continue
             if token.is_punct:
                 continue
             if token.lemma_ == '-PRON-':
                 continue
-            newtokens = filter(None, re.split("\|\D\W+", token.lemma_))
+            newtokens = re.split("[][{}\|/=.]", token.lemma_)
             for t in newtokens:
                 if t not in result:
                     result[t] = 1
                 else:
                     result[t] += 1
-        return result
+        print(result)
+        return " ".join(result.keys())
     
     @staticmethod
-    def compareBodyText(currentPage):
-        Heuristics.preprocess(currentPage)
-        return
+    def compareBodyText(currentPage, quw):
+        curText = quw.nlp(Heuristics.preprocess(currentPage, quw))
+        return curText.similarity(quw.goalText)
         
 
 
@@ -55,5 +55,5 @@ if __name__=='__main__':
     # print(STOP_WORDS)
     curPage = pywikibot.Page(quw.site, "The Worlds of Doctor Who")
     # print(Heuristics.checkCategoriesWithGoal(curPage))
-    processed = Heuristics.preprocess(quw.goalPage)
-    print(processed)
+    sim = Heuristics.compareBodyText(curPage, quw)
+    print(curPage.title() + " vs " + quw.goalPage.title() + ": " + str(sim))

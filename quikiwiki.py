@@ -12,7 +12,9 @@ class Quikiwiki:
         # self.goalPage = pywikibot.Page(self.site, "Doom_(2016_video_game)")
         self.goalPage = pywikibot.Page(self.site, "Yahoo! Games")
         self.goalCategories = set(self.goalPage.categories())
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("en_core_web_md")
+        self.goalText = self.nlp(heuristic.Heuristics.preprocess(self.goalPage, self))
+
     
     # def processGoalText():
     #     self.
