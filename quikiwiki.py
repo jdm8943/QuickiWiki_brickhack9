@@ -1,4 +1,4 @@
-import heuristic, aStar
+import heuristic, aStar, bfs
 import pywikibot
 import time
 
@@ -8,7 +8,7 @@ class Quikiwiki:
         self.site = pywikibot.Site('en', 'wikipedia')  # The site we want to run our bot on
         self.site.login()
         self.startPage = pywikibot.Page(self.site, "Doom (1993 video game)")
-        self.goalPage = pywikibot.Page(self.site, "Wii Shop Channel")
+        self.goalPage = pywikibot.Page(self.site, "Yahoo! Games")
         #Wii Shop Channel
         #Yahoo! Games
         #Doom (1993 video game)
@@ -21,13 +21,25 @@ if __name__=='__main__':
     qw = Quikiwiki()
     print("START:", qw.startPage.title())
     print("GOAL:", qw.goalPage.title())
-    listStar = aStar.runAStar(qw.startPage, qw.goalPage)
-    listStar.reverse()
-    print("A-Star Solution:")
+
+    # listStar = aStar.runAStar(qw.startPage, qw.goalPage, qw)
+    # listStar.reverse()
+    # print("A-Star Solution:")
+    # num = 0
+    # for i in listStar:
+    #     print(num, "\t:", i)
+    #     num+=1
+    
+    listBFS = bfs.runBFS(qw.startPage, qw.goalPage, qw)
+    if(listBFS is False):
+        print(":LAKSDJFF:LSDKAJD:SLFKJERFJKL:ERJOIP:FWEJOI:WERFT")
+    listBFS.reverse()
+    print("BFS Solution:")
     num = 0
-    for i in listStar:
+    for i in listBFS:
         print(num, "\t:", i)
         num+=1
+
     endTime = time.time()
     print("TOTAL TIME: ", (endTime-startTime))
 

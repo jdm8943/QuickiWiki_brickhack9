@@ -5,22 +5,24 @@ import quikiwiki as qw
 class Heuristics:
 
     @staticmethod
-    def calculateH(test):
-        return 0
+    def calculateH(page, qw):
+        return Heuristics.checkCategoriesWithGoal(page, qw)
 
     @staticmethod
     # checks how many categories are the same between the current page and the goal
-    def checkCategoriesWithGoal(currentPage):
+    def checkCategoriesWithGoal(currentPage, quw):
         # print(str(category1.title()[9:]))
         # print(str(category2.title()[9:]))
         curCatSet = set(currentPage.categories())
-        inverseJaccard = (1 - len(set.intersection(curCatSet, quw.goalCategories)) / len(set.union(curCatSet, quw.goalCategories))) * 100
-        if inverseJaccard > 70:
-            return inverseJaccard
-        elif getHeurOfLink(currentPage)[0] < 50:
-            return math.inf
-        else:
-            return inverseJaccard
+        inverseJaccard = (1- len(set.intersection(curCatSet, quw.goalCategories)) / len(set.union(curCatSet, quw.goalCategories))) * 100
+        return inverseJaccard
+        # if inverseJaccard > 70:
+        #     return inverseJaccard
+        # elif Heuristics.getHeurOfLink(currentPage)[0] < 100:
+        #     return math.inf
+        # else:
+        #     print("asdf", inverseJaccard)
+        #     return inverseJaccard
         
     def getHeurOfLink(currentPage):
         pages = list(currentPage.linkedPages)
