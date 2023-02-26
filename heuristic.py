@@ -1,5 +1,5 @@
-import io
-import re, string, pywikibot
+from io import StringIO
+import re, string, pywikibot, lxml
 from nltk import word_tokenize, WordNetLemmatizer, pos_tag
 from nltk.corpus import stopwords
 import pandas as pd
@@ -47,25 +47,30 @@ class Heuristics:
         return result
     @staticmethod
     def preprocess(page) -> str:
-        dataframe = pd.read_csv(io.StringIO(page.get()), sep=",")
-        dfText= dataframe[['text']]
-        dfText['text'] = dfText['text'].str.lower()
-        dfText['text'] = dfText['text'].apply(
-            Heuristics.remove_whitespace
-            ).apply(
-            lambda X: word_tokenize(X)
-            ).apply(
-            Heuristics.remove_stopwords
-            ).apply(
-            # remove_punct
-            lambda x: re.sub('[%s]' % re.escape(string.punctuation), '' , x)
-            ).apply(
-            # remove numbers
-            lambda x: re.sub('W*dw*','',x)
-            ).apply(
-            Heuristics.lemmatization
-            )
-        return dfText['text']
+        pagetext = page.get()
+        doc = quw.nlp(pagetext)
+
+        # dataframe = pd.read_csv(StringIO(pagetext), ["text"], on_bad_lines='skip').squeeze("columns")
+        # dataframe = pd.read_html(page.full_url())
+        # print(dataframe)
+        # dfText = dataframe[['text']]
+        # dfText['text'] = dfText['text'].str.lower()
+        # dfText['text'] = dfText['text'].apply(
+        #     Heuristics.remove_whitespace
+        #     ).apply(
+        #     lambda X: word_tokenize(X)
+        #     ).apply(
+        #     Heuristics.remove_stopwords
+        #     ).apply(
+        #     # remove_punct
+        #     lambda x: re.sub('[%s]' % re.escape(string.punctuation), '' , x)
+        #     ).apply(
+        #     # remove numbers
+        #     lambda x: re.sub('W*dw*','',x)
+        #     ).apply(
+        #     Heuristics.lemmatization
+        #     )
+        # return dfText['text']
     
     @staticmethod
     def compareDocBodies(currentPage):
