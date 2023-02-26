@@ -42,7 +42,8 @@ def getNeighbors(root):
     links = root.page.linkedPages()
     for aLink in links:
         neigh = node.Node(aLink, root)
-        if "list" not in neigh.name.lower():
+        nam = neigh.name.lower()
+        if not nam.startswith("list") and not nam.startswith("category:") and not nam.startswith("help:") and not nam.startswith("template:"):
             neighbors.append(node.Node(aLink, root))
     return neighbors;
 

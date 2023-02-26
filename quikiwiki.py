@@ -8,7 +8,7 @@ class Quikiwiki:
         self.site = pywikibot.Site('en', 'wikipedia')  # The site we want to run our bot on
         self.site.login()
         self.startPage = pywikibot.Page(self.site, "Doom (1993 video game)")
-        self.goalPage = pywikibot.Page(self.site, "Devolver Digital")
+        self.goalPage = pywikibot.Page(self.site, "Wii Shop Channel")
         #Wii Shop Channel
         #Yahoo! Games
         #Doom (1993 video game)

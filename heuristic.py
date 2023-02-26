@@ -14,7 +14,7 @@ class Heuristics:
         # print(str(category2.title()[9:]))
         curCatSet = set(currentPage.categories())
         inverseJaccard = 1 - len(set.intersection(curCatSet, quw.goalCategories)) / len(set.union(curCatSet, quw.goalCategories))
-        return inverseJaccard
+        return 0
 
 
 if __name__=='__main__':
