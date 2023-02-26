@@ -43,7 +43,7 @@ class Node:
    
    def __str__(self) -> str:
       if self.parent is not None:
-         stri =  "[name:" + self.name + ", parent: " + self.parent.name + ", f: " + str(self.f) + ", g:" + str(self.totalPathWeight)
+         stri =  "[" + self.name + "=> parent: " + self.parent.name + ", f: " + str(self.f) + ", g:" + str(self.totalPathWeight)
       else:
-         stri =  "[name:" + self.name + ", parent: NONE";
+         stri =  "[" + self.name + "=> parent: NONE";
       return stri
