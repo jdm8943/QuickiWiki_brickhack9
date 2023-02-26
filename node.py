@@ -15,20 +15,24 @@ import heuristic
 class Node:
    def __init__(self, page, parent, qw):
       self.page = page
-      self.name = page.title() #might be unnecessary since it's a quick command from page
-      self.h = heuristic.Heuristics.calculateH(self.page, qw)
-      
+      self.name = page.title() #might be unnecessary since it's a quick command from page      
       self.parent = parent
       if parent is None:
          self.totalPathWeight = 0      #calculating g
       else:
-         if(self.h == 0):
-            print(self.name, "and ", self.parent)
-         self.totalPathWeight = parent.totalPathWeight + self.getCurrPathWeight(page)
-      self.f = self.totalPathWeight + self.h
+         self.totalPathWeight = 1
+      self.h = 0
+      self.f = 0
+      
 
-   def getCurrPathWeight(self, page):
-      return 1
+   # def getCurrPathWeight(self):
+   #    return 1
+   
+   def calcFn(self, qw):
+      self.h = heuristic.Heuristics.calculateH(self.page, qw)
+      self.f = self.totalPathWeight + self.h
+      # print(self.name + " f(n): " + str(self.f))
+      return self.f
         
    def __eq__(self, other):
       if not isinstance(other, self.__class__):

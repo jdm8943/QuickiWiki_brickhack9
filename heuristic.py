@@ -8,7 +8,8 @@ class Heuristics:
 
     @staticmethod
     def calculateH(page, qw):
-        return Heuristics.checkCategoriesWithGoal(page, qw)
+        # return Heuristics.checkCategoriesWithGoal(page, qw)
+        return 1 - Heuristics.compareTitle(page, qw)
 
     @staticmethod
     # checks how many categories are the same between the current page and the goal
@@ -70,7 +71,7 @@ class Heuristics:
             # for token in newtokens:
             #     t = re.sub(r"[\n\t\s]*", "", token)
             result.append(token.lemma_)
-        print(result)
+        # print(result)
         return " ".join(result)
     
     @staticmethod
@@ -88,7 +89,7 @@ class Heuristics:
             # for token in newtokens:
             #     t = re.sub(r"[\n\t\s]*", "", token)
             result.append(token.lemma_)
-        print(result)
+        # print(result)
         return " ".join(result)
     
     @staticmethod
