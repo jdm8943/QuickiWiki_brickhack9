@@ -1,6 +1,7 @@
 import heuristic, aStar, spacy
 import pandas as pd
 import pywikibot
+import time
 
 class Quikiwiki:
 
@@ -17,16 +18,17 @@ class Quikiwiki:
     #     self.
 
 if __name__=='__main__':
+    startTime = time.time()
     qw = Quikiwiki()
-    print("RAHHH! quikiwiki running!")
-    print(qw.site)
-
-    # print(qw.goalPage.title())
-    # listStar = aStar.runAStar(qw.startPage, qw.goalPage)
-    # listStar.reverse()
-    # print("ASTAR::::::::")
-    # num = 0
-    # for i in listStar:
-    #     print(num, ":", i)
-    #     num+=1
+    print("START:", qw.startPage.title())
+    print("GOAL:", qw.goalPage.title())
+    listStar = aStar.runAStar(qw.startPage, qw.goalPage)
+    listStar.reverse()
+    print("A-Star Solution:")
+    num = 0
+    for i in listStar:
+        print(num, "\t:", i)
+        num+=1
+    endTime = time.time()
+    print("TOTAL TIME: ", (endTime-startTime))
 

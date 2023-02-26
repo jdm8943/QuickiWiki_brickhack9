@@ -17,11 +17,10 @@ def runAStar(start, end):    # start/end are nodes for a*
 
         closed.add(curr)        # add curr to closed
 
-        print("CURR: ", curr)
+        # print("CURR: ", curr)
 
         for neighbor in getNeighbors(curr):
             if neighbor.page == end:         # if neighbor = goal, return the path
-                print("WE ARE AT THE END!!!")
                 return getPath(neighbor)
             if neighbor in closed:      # if curr has already been visited go next
                 continue
@@ -35,20 +34,17 @@ def runAStar(start, end):    # start/end are nodes for a*
                 except:
                     #if not in heap, add it to heap.
                     heappush(open, neighbor)
-                    # neighbor.setF();
     
                 
-    # TODO Sol get neighbors from a node and return nodes
+
 def getNeighbors(root):
     neighbors = []
     links = root.page.linkedPages()
     for aLink in links:
-        neighbors.append(node.Node(aLink, root))
+        neigh = node.Node(aLink, root)
+        if "list" not in neigh.name.lower():
+            neighbors.append(node.Node(aLink, root))
     return neighbors;
-
-# TODO Sol return the cost of a page
-def calculateCost(node):
-    return 1;
 
 def getPath(node):
     totPath = []

@@ -19,6 +19,7 @@ class Heuristics:
         curCatSet = set(currentPage.categories())
         inverseJaccard = 1 - len(set.intersection(curCatSet, quw.goalCategories)) / len(set.union(curCatSet, quw.goalCategories))
         return inverseJaccard
+<<<<<<< HEAD
     
 
     # text preprocessing ideas from machinelearningknowledge.ai
@@ -76,6 +77,8 @@ class Heuristics:
     def compareDocBodies(currentPage):
         pass
         
+=======
+>>>>>>> main
 
 
 if __name__=='__main__':
