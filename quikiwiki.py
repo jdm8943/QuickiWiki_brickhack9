@@ -13,7 +13,8 @@ class Quikiwiki:
         self.goalPage = pywikibot.Page(self.site, "Yahoo! Games")
         self.goalCategories = set(self.goalPage.categories())
         self.nlp = spacy.load("en_core_web_md")
-        self.goalText = self.nlp(heuristic.Heuristics.preprocess(self.goalPage, self))
+        # self.goalLinks = self.nlp(heuristic.Heuristics.preprocessLinks(self.goalPage, self))
+        self.goalTitle = self.nlp(heuristic.Heuristics.preprocessTitle(self.goalPage, self))
 
     
     # def processGoalText():
