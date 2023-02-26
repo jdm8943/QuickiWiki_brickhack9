@@ -6,7 +6,8 @@ class Heuristics:
 
     @staticmethod
     def calculateH(page, qw):
-        return Heuristics.checkCategoriesWithGoal(page, qw)
+        return 0
+        # return Heuristics.checkCategoriesWithGoal(page, qw)
 
     @staticmethod
     # checks how many categories are the same between the current page and the goal

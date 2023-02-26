@@ -22,8 +22,8 @@ class Node:
       if parent is None:
          self.totalPathWeight = 0      #calculating g
       else:
-         if(self.h == 0):
-            print(self.name, "and ", self.parent)
+         # if(self.h == 0):
+         #    print(self.name, "and ", self.parent)
          self.totalPathWeight = parent.totalPathWeight + self.getCurrPathWeight(page)
       self.f = self.totalPathWeight + self.h
 

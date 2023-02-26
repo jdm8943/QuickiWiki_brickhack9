@@ -21,25 +21,23 @@ if __name__=='__main__':
     qw = Quikiwiki()
     print("START:", qw.startPage.title())
     print("GOAL:", qw.goalPage.title())
-
-    # listStar = aStar.runAStar(qw.startPage, qw.goalPage, qw)
-    # listStar.reverse()
-    # print("A-Star Solution:")
-    # num = 0
-    # for i in listStar:
-    #     print(num, "\t:", i)
-    #     num+=1
-    
-    listBFS = bfs.runBFS(qw.startPage, qw.goalPage, qw)
-    if(listBFS is False):
-        print(":LAKSDJFF:LSDKAJD:SLFKJERFJKL:ERJOIP:FWEJOI:WERFT")
-    listBFS.reverse()
-    print("BFS Solution:")
-    num = 0
-    for i in listBFS:
-        print(num, "\t:", i)
-        num+=1
-
-    endTime = time.time()
-    print("TOTAL TIME: ", (endTime-startTime))
+    try:
+        # listStar = aStar.runAStar(qw.startPage, qw.goalPage, qw)
+        # listStar.reverse()
+        # print("A-Star Solution:")
+        # num = 0
+        # for i in listStar:
+        #     print(num, "\t:", i)
+        #     num+=1
+        
+        listBFS = bfs.runBFS(qw.startPage, qw.goalPage)
+        listBFS.reverse()
+        print("BFS Solution:")
+        num = 0
+        for i in listBFS:
+            print(num, "\t:", i)
+            num+=1
+    finally:
+        endTime = time.time()
+        print("TOTAL TIME: ", (endTime-startTime))
 

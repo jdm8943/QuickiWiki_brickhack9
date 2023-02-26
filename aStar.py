@@ -43,7 +43,7 @@ def getNeighbors(root, qw):
     for aLink in links:
         neigh = node.Node(aLink, root, qw)
         nam = neigh.name.lower()
-        if not nam.startswith("list") and not nam.startswith("category:") and not nam.startswith("help:") and not nam.startswith("template:"):
+        if not nam.startswith("list") and not nam.startswith("category:") and not nam.startswith("help:") and not nam.startswith("template:")and not nam.startswith("help:") and not nam.startswith("portal:") and not nam.startswith("draft:") and not nam.startswith("template talk:") and not nam.startswith("user talk:"):
             neighbors.append(neigh)
     return neighbors;
 
