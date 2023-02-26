@@ -7,6 +7,7 @@ import quikiwiki as qw
 
 class Heuristics:
 
+
     @staticmethod
     def calculateH(page):
         Heuristics.checkCategoriesWithGoal(page)
@@ -19,70 +20,40 @@ class Heuristics:
         curCatSet = set(currentPage.categories())
         inverseJaccard = 1 - len(set.intersection(curCatSet, quw.goalCategories)) / len(set.union(curCatSet, quw.goalCategories))
         return inverseJaccard
-<<<<<<< HEAD
     
 
-    # text preprocessing ideas from machinelearningknowledge.ai
-    def remove_whitespace(text):
-        return  " ".join(text.split())
-    def remove_stopwords(text):
-        en_stopwords = stopwords.words('english')
-        # result = []
-        # for token in text:
-        #     if token not in en_stopwords:
-        #         result.append(token)    
-        # return result
-        return " ".join([word for word in str(text).split() if word not in en_stopwords])
-    # def remove_punct(text):
-    #     tokenizer = RegexpTokenizer(r"\w+")
-    #     lst=tokenizer.tokenize(' '.join(text))
-    #     return lst
-    def lemmatization(text):
-        result=[]
-        wordnet = WordNetLemmatizer()
-        for token,tag in pos_tag(text):
-            pos=tag[0].lower()
-            if pos not in ['a', 'r', 'n', 'v']:
-                pos='n'
-            result.append(wordnet.lemmatize(token,pos))
-        return result
     @staticmethod
     def preprocess(page) -> str:
         pagetext = page.get()
-        doc = quw.nlp(pagetext)
-
-        # dataframe = pd.read_csv(StringIO(pagetext), ["text"], on_bad_lines='skip').squeeze("columns")
-        # dataframe = pd.read_html(page.full_url())
-        # print(dataframe)
-        # dfText = dataframe[['text']]
-        # dfText['text'] = dfText['text'].str.lower()
-        # dfText['text'] = dfText['text'].apply(
-        #     Heuristics.remove_whitespace
-        #     ).apply(
-        #     lambda X: word_tokenize(X)
-        #     ).apply(
-        #     Heuristics.remove_stopwords
-        #     ).apply(
-        #     # remove_punct
-        #     lambda x: re.sub('[%s]' % re.escape(string.punctuation), '' , x)
-        #     ).apply(
-        #     # remove numbers
-        #     lambda x: re.sub('W*dw*','',x)
-        #     ).apply(
-        #     Heuristics.lemmatization
-        #     )
-        # return dfText['text']
+        doc = quw.nlp(pagetext.lower())
+        result = {}
+        for token in doc:
+            if token.text in STOP_WORDS:
+                continue
+            if token.is_punct:
+                continue
+            if token.lemma_ == '-PRON-':
+                continue
+            newtokens = filter(None, re.split("\|\D\W+", token.lemma_))
+            for t in newtokens:
+                if t not in result:
+                    result[t] = 1
+                else:
+                    result[t] += 1
+        return result
     
     @staticmethod
-    def compareDocBodies(currentPage):
-        pass
+    def compareBodyText(currentPage):
+        Heuristics.preprocess(currentPage)
+        return
         
-=======
->>>>>>> main
 
 
 if __name__=='__main__':
     quw = qw.Quikiwiki()
+    STOP_WORDS = quw.nlp.Defaults.stop_words
+    # print(STOP_WORDS)
     curPage = pywikibot.Page(quw.site, "The Worlds of Doctor Who")
-    print(Heuristics.checkCategoriesWithGoal(curPage))
-    Heuristics.preprocess(quw.goalPage)
+    # print(Heuristics.checkCategoriesWithGoal(curPage))
+    processed = Heuristics.preprocess(quw.goalPage)
+    print(processed)
