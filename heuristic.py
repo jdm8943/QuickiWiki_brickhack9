@@ -13,8 +13,8 @@ class Heuristics:
         # print(str(category1.title()[9:]))
         # print(str(category2.title()[9:]))
         curCatSet = set(currentPage.categories())
-        numSame = len(set.intersection(curCatSet, quw.goalCategories))
-        return numSame
+        inverseJaccard = 1 - len(set.intersection(curCatSet, quw.goalCategories)) / len(set.union(curCatSet, quw.goalCategories))
+        return inverseJaccard
 
 
 if __name__=='__main__':
