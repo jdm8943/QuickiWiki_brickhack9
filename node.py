@@ -13,14 +13,17 @@ import heuristic
    f                 - totalPathWeight + heuristic value (float)
 """
 class Node:
-   def __init__(self, page, parent):
+   def __init__(self, page, parent, qw):
       self.page = page
       self.name = page.title() #might be unnecessary since it's a quick command from page
-      self.h = heuristic.Heuristics.calculateH(self.page)
+      self.h = heuristic.Heuristics.calculateH(self.page, qw)
+      
       self.parent = parent
       if parent is None:
          self.totalPathWeight = 0      #calculating g
       else:
+         if(self.h == 0):
+            print(self.name, "and ", self.parent)
          self.totalPathWeight = parent.totalPathWeight + self.getCurrPathWeight(page)
       self.f = self.totalPathWeight + self.h
 

@@ -5,9 +5,9 @@ from heapq import *
 site = pw.Site('en', 'wikipedia')  # The site we want to run our bot on
 site.login()
 
-def runAStar(start, end):    # start/end are nodes for a*
+def runAStar(start, end, qw):    # start/end are nodes for a*
     self = set();
-    start = node.Node(start, None)
+    start = node.Node(start, None, qw)
     start.totalPathWeight = 0      # distance from start    
     open = [start]
     closed = set()
@@ -19,7 +19,7 @@ def runAStar(start, end):    # start/end are nodes for a*
 
         # print("CURR: ", curr)
 
-        for neighbor in getNeighbors(curr):
+        for neighbor in getNeighbors(curr, qw):
             if neighbor.page == end:         # if neighbor = goal, return the path
                 return getPath(neighbor)
             if neighbor in closed:      # if curr has already been visited go next
@@ -37,13 +37,14 @@ def runAStar(start, end):    # start/end are nodes for a*
     
                 
 
-def getNeighbors(root):
+def getNeighbors(root, qw):
     neighbors = []
     links = root.page.linkedPages()
     for aLink in links:
-        neigh = node.Node(aLink, root)
-        if "list" not in neigh.name.lower():
-            neighbors.append(node.Node(aLink, root))
+        neigh = node.Node(aLink, root, qw)
+        nam = neigh.name.lower()
+        if not nam.startswith("list") and not nam.startswith("category:") and not nam.startswith("help:") and not nam.startswith("template:"):
+            neighbors.append(neigh)
     return neighbors;
 
 def getPath(node):
