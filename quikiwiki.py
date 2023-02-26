@@ -1,5 +1,6 @@
 import heuristic, aStar
 import pywikibot
+import time
 
 class Quikiwiki:
 
@@ -7,14 +8,16 @@ class Quikiwiki:
         self.site = pywikibot.Site('en', 'wikipedia')  # The site we want to run our bot on
         self.site.login()
         self.startPage = pywikibot.Page(self.site, "Doom (1993 video game)")
-        self.goalPage = pywikibot.Page(self.site, "Wii Shop Channel")
+        self.goalPage = pywikibot.Page(self.site, "Devolver Digital")
         #Wii Shop Channel
         #Yahoo! Games
         #Doom (1993 video game)
+        #Devolver Digital
         
         self.goalCategories = set(self.goalPage.categories())
 
 if __name__=='__main__':
+    startTime = time.time()
     qw = Quikiwiki()
     print("START:", qw.startPage.title())
     print("GOAL:", qw.goalPage.title())
@@ -25,4 +28,6 @@ if __name__=='__main__':
     for i in listStar:
         print(num, "\t:", i)
         num+=1
+    endTime = time.time()
+    print("TOTAL TIME: ", (endTime-startTime))
 

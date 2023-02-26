@@ -34,20 +34,17 @@ def runAStar(start, end):    # start/end are nodes for a*
                 except:
                     #if not in heap, add it to heap.
                     heappush(open, neighbor)
-                    # neighbor.setF();
     
                 
-    # TODO Sol get neighbors from a node and return nodes
+
 def getNeighbors(root):
     neighbors = []
     links = root.page.linkedPages()
     for aLink in links:
-        neighbors.append(node.Node(aLink, root))
+        neigh = node.Node(aLink, root)
+        if "list" not in neigh.name.lower():
+            neighbors.append(node.Node(aLink, root))
     return neighbors;
-
-# TODO Sol return the cost of a page
-def calculateCost(node):
-    return 1;
 
 def getPath(node):
     totPath = []
